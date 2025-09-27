@@ -72,10 +72,19 @@ Kết quả.</p>
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6eac5c9e-e935-4b05-b7d9-f0949f96cb14" /></p>
 
 - BƯỚC 2: Cấu hình IIS, Domain, Localhost.</P>
-+ Cài đặt IIS: Vào Control Painel -> Programs -> Turn Windows features on or off -> Tích chọn Internet Information Services (IIS) và cài đặt.</p>
++ Cài đặt IIS: Vào **Control Painel** -> **Programs** -> **Turn Windows features on or off** -> Tích chọn ***Internet Information Services (IIS)*** và cài đặt.</p>
 <img width="382" height="98" alt="image" src="https://github.com/user-attachments/assets/9225eedc-ac9a-498c-91d8-01e6008ff95c" /></p>
-+ Tạo Website trên IIS: Mở IIS Manager (inetmgr) -> Chuột phải vào Sites -> chọn Add Website...</P>
++ Tạo Website trên IIS: Mở **IIS Manager (inetmgr)** -> Chuột phải vào **Sites** -> chọn **Add Website...**</P>
 <img width="1293" height="615" alt="image" src="https://github.com/user-attachments/assets/2e7d314d-3c04-4b8b-9a31-5dacc77fa76e" /></p>
++ Điền thông tin ở cửa sổ **add website**:</p>
+<img width="730" height="838" alt="image" src="https://github.com/user-attachments/assets/65402b3f-5146-414e-8c37-28416c260c67" /></p>
++ Cấu hình domain nội bộ (LAN): Mở **notepad** quyền admin -> mở file **hosts** -> thêm dòng **127.0.0.1 game.com** ở cuối -> Lưu file.</p>
+---> Sau khi làm xong tất cả các bước sẽ được kết quả như sau</p>
+<img width="1919" height="1246" alt="Untitled5" src="https://github.com/user-attachments/assets/c6a6b071-93c6-4c73-afbf-c5227aef984a" />.
+
+
+
+
 
 
 
