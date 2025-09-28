@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Typing Attack - Bullet</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+            display: flex;
+            justify-content: center;
+        }
+
+        #gameContainer {
+            position: relative;
+            width: 800px;
+            background: #000022;
+            display: flex;
+        }
+
+        /* Hai bên */
+        #leftBG, #rightBG {
+            width: calc(50vw - 400px);
+            background: url('space.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        #gameCanvas {
+            display: block;
+        }
+
+        #score, #level {
+            position: absolute;
+            top: 12px;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px black;
+        }
+
+        #score {
+            left: 12px;
+        }
+
+        #level {
+            right: 12px;
+        }
+
+        /* Màn hình bắt đầu */
+        #startScreen, #gameOverScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 800px;
+            height: 700px;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+            #startScreen h1, #gameOverScreen h1 {
+                font-size: 40px;
+                margin-bottom: 20px;
+                color: cyan;
+            }
+
+        .btn {
+            padding: 12px 28px;
+            font-size: 22px;
+            background: cyan;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+            .btn:hover {
+                background: deepskyblue;
+            }
+    </style>
+</head>
+<body>
+    <!-- Bố cục trang -->
+    <div id="leftBG"></div>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="700"></canvas>
+        <div id="score">Điểm: 0</div>
+        <div id="level">Cấp: 1</div>
+
+        <!-- Màn hình bắt đầu -->
+        <div id="startScreen">
+            <h1>Typing Attack</h1>
+            <button id="startBtn" class="btn">Bắt đầu</button>
+        </div>
+
+        <!-- Màn hình thua -->
+        <div id="gameOverScreen" style="display:none;">
+            <h1>Game Over</h1>
+            <p id="finalScore">Điểm: 0</p>
+            <button id="restartBtn" class="btn">Chơi lại</button>
+        </div>
+    </div>
+    <div id="rightBG"></div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const levelEl = document.getElementById('level');
+        const startScreen = document.getElementById('startScreen');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const finalScoreEl = document.getElementById('finalScore');
+
+        let shipImg = new Image();
+        shipImg.src = "ship.png";
+        let shipX = canvas.width / 2 - 25;
+        let shipY = canvas.height - 90;
+
+        let words = [];
+        let bullets = [];
+        let explosions = [];
+        let score = 0;
+        let currentWord = null;
+        let level = 1;
+        let fallSpeed = 1; // tốc độ rơi cơ bản
+        let spawnInterval = 2000; // thời gian xuất hiện chữ (ms)
+        let wordTimer;
+        const levelUpScore = 50; // mỗi 50 điểm tăng level
+
+        const wordList = [
+            "clean", "logs", "signed", "hit", "fire", "star", "code", "moon",
+            "space", "alien", "rocket", "typing", "attack"
+        ];
+
+        let gameRunning = false;
+
+        // thêm từ mới
+        function addWord() {
+            let t = wordList[Math.floor(Math.random() * wordList.length)];
+            let x, tries = 0;
+            do {
+                x = Math.random() * (canvas.width - 150) + 50;
+                tries++;
+            } while (words.some(w => Math.abs(w.x - x) < 100) && tries < 50);
+            words.push({
+                text: t,
+                letters: t.split(''),
+                x: x,
+                y: -10,
+                speed: fallSpeed,
+                currentIndex: 0
+            });
+        }
+
+        // vẽ
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = "26px Arial";
+            words.forEach(w => {
+                for (let i = 0; i < w.letters.length; i++) {
+                    const ch = w.letters[i];
+                    const lx = w.x + i * 20;
+                    const ly = w.y;
+                    if (ch !== '') {
+                        ctx.fillStyle = (w === currentWord && i === w.currentIndex) ? "orange" : "white";
+                        ctx.fillText(ch, lx, ly);
+                    }
+                }
+            });
+
+            // phi thuyền
+            if (shipImg.complete) {
+                ctx.drawImage(shipImg, shipX, shipY, 50, 50);
+            } else {
+                ctx.fillStyle = "gray";
+                ctx.fillRect(shipX, shipY, 50, 50);
+            }
+
+            // vẽ đạn
+            bullets.forEach(b => {
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = "cyan";
+                ctx.fill();
+            });
+
+            // vụ nổ
+            explosions.forEach(ex => {
+                ctx.beginPath();
+                ctx.arc(ex.x, ex.y, ex.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,165,0,${ex.alpha})`;
+                ctx.fill();
+            });
+
+            scoreEl.textContent = 'Điểm: ' + score;
+            levelEl.textContent = 'Cấp: ' + level;
+        }
+
+        // cập nhật
+        function update() {
+            words.forEach(w => w.y += w.speed);
+
+            // kiểm tra thua
+            for (let w of words) {
+                if (w.y > canvas.height - 60) {
+                    gameOver();
+                    return;
+                }
+            }
+
+            // update đạn
+            bullets.forEach(b => {
+                const tx = b.word.x + b.index * 20;
+                const ty = b.word.y;
+
+                b.x = tx;
+                b.y = ty;
+
+                if (!b.hit) {
+                    b.hit = true;
+                    if (b.word.letters[b.index] !== '') {
+                        b.word.letters[b.index] = '';
+                        b.word.currentIndex++;
+                    }
+                    if (b.word.currentIndex >= b.word.letters.length) {
+                        explosions.push({
+                            x: b.word.x + b.word.text.length * 10,
+                            y: b.word.y,
+                            radius: 15,
+                            alpha: 1
+                        });
+                        const idx = words.indexOf(b.word);
+                        if (idx !== -1) words.splice(idx, 1);
+                        score += 10;
+                        if (currentWord === b.word) currentWord = null;
+
+                        // tăng level khi đạt điểm
+                        if (score % levelUpScore === 0) {
+                            level++;
+                            fallSpeed = 1 + (level - 1) * 0.8;
+                            spawnInterval = Math.max(600, spawnInterval - 150);
+                            clearInterval(wordTimer);
+                            wordTimer = setInterval(addWord, spawnInterval);
+                        }
+                    }
+                }
+            });
+
+            bullets = [];
+
+            explosions.forEach(ex => { ex.radius += 0.6; ex.alpha -= 0.03; });
+            explosions = explosions.filter(ex => ex.alpha > 0);
+
+            if (currentWord && currentWord.currentIndex >= currentWord.letters.length) {
+                currentWord = null;
+            }
+        }
+
+        // bắn đạn
+        function shootBullet(word) {
+            const idx = word.currentIndex;
+            bullets.push({
+                x: shipX + 25,
+                y: shipY + 10,
+                word: word,
+                index: idx,
+                hit: false
+            });
+        }
+
+        // gõ phím
+        document.addEventListener('keydown', e => {
+            if (!gameRunning) return;
+            if (!/^[a-zA-Z]$/.test(e.key)) return;
+            const key = e.key.toLowerCase();
+
+            if (currentWord) {
+                const idx = currentWord.currentIndex;
+                if (currentWord.letters[idx].toLowerCase() === key) {
+                    shootBullet(currentWord);
+                }
+                return;
+            }
+
+            for (let w of words) {
+                const idx = w.currentIndex;
+                if (w.letters[idx].toLowerCase() === key) {
+                    currentWord = w;
+                    shootBullet(w);
+                    break;
+                }
+            }
+        });
+
+        function startGame() {
+            score = 0;
+            level = 1;
+            fallSpeed = 1;
+            spawnInterval = 2000;
+            words = [];
+            bullets = [];
+            explosions = [];
+            currentWord = null;
+
+            wordTimer = setInterval(addWord, spawnInterval);
+            for (let i = 0; i < 2; i++) addWord();
+
+            gameRunning = true;
+            loop();
+        }
+
+        function loop() {
+            if (gameRunning) {
+                update();
+                draw();
+                requestAnimationFrame(loop);
+            }
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            clearInterval(wordTimer);
+            finalScoreEl.textContent = "Điểm: " + score;
+            gameOverScreen.style.display = "flex";
+        }
+
+        // Bấm nút bắt đầu
+        startBtn.addEventListener("click", () => {
+            startScreen.style.display = "none";
+            startGame();
+        });
+
+        // Bấm nút chơi lại
+        restartBtn.addEventListener("click", () => {
+            gameOverScreen.style.display = "none";
+            startGame();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\bin\Debug\WinFormGame.exe
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\bin\Debug\WinFormGame.pdb
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormGame.csproj.AssemblyReference.cache
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormGame.Form1.resources
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormGame.Properties.Resources.resources
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormGame.csproj.GenerateResource.cache
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormGame.csproj.CoreCompileInputs.cache
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormGame.exe
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormGame.pdb
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\bin\Debug\Game.dll
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\bin\Debug\Game.pdb
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\Game của dương\WinFormGame\obj\Debug\WinFormG.4C8FC44D.Up2Date

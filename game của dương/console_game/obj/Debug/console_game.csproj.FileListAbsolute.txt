@@ -1,0 +1,9 @@
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\bin\Debug\console_game.exe
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\bin\Debug\console_game.pdb
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\bin\Debug\Game.dll
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\bin\Debug\Game.pdb
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\obj\Debug\console_game.csproj.AssemblyReference.cache
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\obj\Debug\console_game.csproj.CoreCompileInputs.cache
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\obj\Debug\console_.2938E821.Up2Date
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\obj\Debug\console_game.exe
+D:\BaiTap\Phát triển ứng dụng trên nền web\Game\game của dương\console_game\obj\Debug\console_game.pdb
