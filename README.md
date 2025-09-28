@@ -41,12 +41,14 @@ Kết quả.</p>
 <img width="1873" height="600" alt="image" src="https://github.com/user-attachments/assets/cfafb549-fc36-45a6-b2a5-6cc049c97c8f" /></p>
 - Tiến hành add **reference**.</p>
 <img width="851" height="823" alt="image" src="https://github.com/user-attachments/assets/43cc8fcf-34e4-4740-b59a-883beeb6d7a7" /></p>
-- Thêm dấu ấn cá nhân: Chọn **View** -> **Toolbox** -> Kéo thả **Label** vào form.</p>
-<img width="368" height="507" alt="image" src="https://github.com/user-attachments/assets/48878fbd-c2d3-470f-8e4c-63d7ee26f033" /></p>
-- Đổi Text của Label thành: NGUYỄN ĐỨC DƯƠNG.</p>
-<img width="442" height="379" alt="image" src="https://github.com/user-attachments/assets/857778c9-b41c-4b0f-a4e5-8be9f4b253bc" /></p>
+- Thêm dấu ấn cá nhân: Chọn **View** -> **Toolbox** -> Kéo thả **Label**, **Texbox**, **button**,...  vào form.</p>
+<img width="779" height="246" alt="image" src="https://github.com/user-attachments/assets/d78550a2-2b19-481f-ae61-b905d40691a9" /></P>
+- Thêm Code vào Form1.cs + Form1.Designer.cs.</p>
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/77d55f8c-bd1c-4463-b68b-9702f8302232" /></p>
 ->> Build và kiểm tra kết quả.</p>
-<img width="755" height="495" alt="image" src="https://github.com/user-attachments/assets/b06ae278-6365-423d-892b-d3c685801862" /></p>
++ Nhập đúng 1 trong những chữ ở enemy: Mỗi chữ 10 điểm.</p>
++ Nếu nhập sai người chơi không được điểm.</p>
+<img width="1000" height="330" alt="image" src="https://github.com/user-attachments/assets/7048061a-6dd2-4db3-ac1d-e8db4136cfcf" /></p>
 
 4. WEB đơn giản, sử dụng web server IIS.</p>
 - Các bước triển khai:</p>
@@ -79,6 +81,7 @@ Kết quả.</p>
 + Điền thông tin ở cửa sổ **add website**:</p>
 <img width="730" height="838" alt="image" src="https://github.com/user-attachments/assets/65402b3f-5146-414e-8c37-28416c260c67" /></p>
 + Cấu hình domain nội bộ (LAN): Mở **notepad** quyền admin -> mở file **hosts** -> thêm dòng **127.0.0.1 game.com** ở cuối -> Lưu file.</p>
+<img width="1009" height="793" alt="image" src="https://github.com/user-attachments/assets/7002990a-c0c3-42f9-8190-2e54f0efa5d5" /></p>
 ---> Sau khi làm xong tất cả các bước sẽ được kết quả như sau</p>
 <img width="1919" height="1246" alt="Untitled5" src="https://github.com/user-attachments/assets/c6a6b071-93c6-4c73-afbf-c5227aef984a" />.
 
